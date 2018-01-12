@@ -29,7 +29,7 @@ wget -q https://raw.githubusercontent.com/dolpen/setup_zny_miner/develop/setup_m
 ################
 
 cd /root/
-wget https://raw.githubusercontent.com/dolpen/setup_zny_miner/develop/setup_invoker.sh
+wget -q https://raw.githubusercontent.com/dolpen/setup_zny_miner/develop/setup_invoker.sh -O - | sh
 
 ################
 #Set variables
