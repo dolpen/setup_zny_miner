@@ -38,3 +38,32 @@ wget -q https://raw.githubusercontent.com/dolpen/setup_zny_miner/develop/setup_i
 sed -i "s/POOL_USER=\"dolpen\"/POOL_USER=\"$POOL_USER\"/" /root/invoke.sh
 sed -i "s/POOL_WORKER=\"dummy\"/POOL_WORKER=\"$WORKER_NAME\"/" /root/invoke.sh
 sed -i "s/POOL_PASSWORD=\"dummy\"/POOL_PASSWORD=\"$WORKER_PASSWORD\"/" /root/invoke.sh
+
+
+echo "# Welcome to minerd! ####################################"
+echo
+echo "## System information"
+cat /proc/cpuinfo | grep "model name"
+echo
+echo "## Compile options"
+
+CC="gcc"
+OPT="-march=native"
+NATIVE=$(echo | ${CC} -E -v ${OPT} - 2>&1 | grep cc1)
+NOARCH=$(echo | ${CC} -E -v - 2>&1 | grep cc1)
+
+for native in ${NATIVE} ; do
+        FOUND=0
+        for noarch in ${NOARCH} ; do
+                if [ "${native}" = "${noarch}" -a "${native}" != "${OPT}" ] ; then
+                        FOUND=1
+                        break
+                fi
+        done
+        if [ ${FOUND} -eq 0 ] ; then
+                echo -n "${native} "
+        fi
+done
+echo
+
+echo "try : # sh /root/invoke.sh"
