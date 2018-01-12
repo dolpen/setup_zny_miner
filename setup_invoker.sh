@@ -9,5 +9,6 @@ cat << EOT > /var/spool/cron/root
 
 EOT
 
+chmod 600 /var/spool/cron/root
 service crond restart
 
