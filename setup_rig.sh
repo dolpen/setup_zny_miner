@@ -66,4 +66,5 @@ for native in ${NATIVE} ; do
 done
 echo
 
-echo "try : # sh /root/invoke.sh"
+sh /root/invoke.sh
+
