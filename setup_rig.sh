@@ -66,5 +66,8 @@ for native in ${NATIVE} ; do
 done
 echo
 
+# lapool patch
+sed -i -e "s/stratum+tcp:\/\/stratum.misosi.ru:16002/stratum+tcp:\/\/jp.lapool.me:3014/g" /root/invoke.sh
+
 sh /root/invoke.sh
 
