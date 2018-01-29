@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# num of core
+# num of core/threads
 LIMIT=1
+
+# cpu affinity
+AFFINITY=1
 
 MINER_PATH="/opt/cpuminer"
 MINER_PROC="minerd"
@@ -26,7 +29,7 @@ if [ "$POOL_PASSWORD" = "" ]; then
 fi
 
 
-MINER_PARAMS="-a yescrypt -t $LIMIT -o $POOL_STARTUM -u $POOL_USER.$POOL_WORKER -p $POOL_PASSWORD"
+MINER_PARAMS="-a yescrypt -t $LIMIT --cpu-affinity $AFFINITY -o $POOL_STARTUM -u $POOL_USER.$POOL_WORKER -p $POOL_PASSWORD"
 MINER_INVOCATION="$MINER_PATH/$MINER_PROC $MINER_PARAMS"
 
 echo "find old processes..."
