@@ -1,9 +1,5 @@
 #!/bin/bash
 
-cd /root
-
-wget https://raw.githubusercontent.com/dolpen/setup_zny_miner/develop/invoke.sh
-
 cat << EOT > /var/spool/cron/root
 0 * * * * touch /tmp/write_test || /sbin/reboot
 0 * * * * ping -W 1 -c 1 8.8.8.8 || /sbin/reboot
