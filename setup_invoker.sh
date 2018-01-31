@@ -34,7 +34,6 @@ while read cid; do
 done <<< "`echo -e "$CPU_INFO"`"
 
 cat << EOT > /root/invoke.sh
-
 #!/bin/bash
 
 # cpu setting
