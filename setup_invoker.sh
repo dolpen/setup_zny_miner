@@ -61,7 +61,7 @@ do
     NOW=\`date +%s\`
     PASSTIME=\`expr \$NOW - \$START\`
     if [ \$PASSTIME -gt 86400 ]; then
-        kill $i
+        kill \$i
         echo "kill \$i at "\`date\`
     fi
 done
