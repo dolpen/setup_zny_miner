@@ -56,13 +56,13 @@ MINER_INVOCATION="\$MINER_PATH/\$MINER_PROC \$MINER_PARAMS"
 echo "find old processes..."
 for i in \`ps aux | grep \$MINER_PROC | grep -v grep | grep -v SCREEN | gawk '{print \$2}'\`
 do
-    TIME=\`ps -o lstart --noheader -p \$i\`;
-    START=\`date +%s -d "\$TIME"\`;
-    NOW=\`date +%s\`;
-    PASSTIME=`expr \$NOW - \$START`;
+    TIME=\`ps -o lstart --noheader -p \$i\`
+    START=\`date +%s -d "\$TIME"\`
+    NOW=\`date +%s\`
+    PASSTIME=\`expr \$NOW - \$START\`
     if [ \$PASSTIME -gt 86400 ]; then
-        kill $i;
-        echo "kill \$i at "\`date\`;
+        kill $i
+        echo "kill \$i at "\`date\`
     fi
 done
 
