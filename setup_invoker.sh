@@ -33,7 +33,7 @@ while read cid; do
   CPU_FLAG=`expr $CPU_FLAG + $CPU_FLAG`
 done <<< "`echo -e "$CPU_INFO"`"
 
-cat << EOT > /root/invoker.sh
+cat << EOT > /root/invoke.sh
 
 #!/bin/bash
 
@@ -55,21 +55,21 @@ MINER_PARAMS="-a yescrypt -t \$CPU_LIMIT --cpu-affinity \$CPU_AFFINITY -o \$POOL
 MINER_INVOCATION="\$MINER_PATH/\$MINER_PROC \$MINER_PARAMS"
 
 echo "find old processes..."
-for i in `ps aux | grep \$MINER_PROC | grep -v grep | grep -v SCREEN | gawk '{print \$2}'`
+for i in \`ps aux | grep \$MINER_PROC | grep -v grep | grep -v SCREEN | gawk '{print \$2}'\`
 do
-    TIME=`ps -o lstart --noheader -p \$i`;
-    START=`date +%s -d "\$TIME"`;
-    NOW=`date +%s`;
+    TIME=\`ps -o lstart --noheader -p \$i\`;
+    START=\`date +%s -d "\$TIME"\`;
+    NOW=\`date +%s\`;
     PASSTIME=`expr \$NOW - \$START`;
     if [ \$PASSTIME -gt 86400 ]; then
         kill $i;
-        echo "kill \$i at "`date`;
+        echo "kill \$i at "\`date\`;
     fi
 done
 
 echo "checking process..."
-count=`ps aux | grep \$MINER_PROC | grep -v grep | grep -v SCREEN | wc -l`
-if [ $count = 0 ]; then
+count=\`ps aux | grep \$MINER_PROC | grep -v grep | grep -v SCREEN | wc -l\`
+if [ \$count = 0 ]; then
     echo "starting new process..."
     echo "\$MINER_INVOCATION"
     screen -AmdS miner \$MINER_INVOCATION
