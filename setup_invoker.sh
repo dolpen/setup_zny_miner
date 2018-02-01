@@ -17,27 +17,45 @@ if [ "$POOL_PASSWORD" = "" ]; then
   exit 1
 fi
 
+CPU_INFO=`grep "core id" /proc/cpuinfo | sed -e "s/core\sid\s\t:\s//"`
 # now bit for mask
 CPU_FLAG=1
+# of all cpu cores (includes HT/SMT)
+CPU_VIRT=0
 # of physical cpu cores
 CPU_PHYS=0
-# affinity mask (only physical core works)
+# affinity mask
 CPU_MASK=0
+CPU_USES=0
 
-CPU_INFO=`grep "core id" /proc/cpuinfo | sed -e "s/core\sid\s\t:\s//"`
+# count cores
+while read cid; do
+  if [ ${cid} = "0" ]; then
+    CPU_PHYS=`expr $CPU_PHYS + 1`
+  fi
+  CPU_VIRT=`expr $CPU_VIRT + 1`
+done <<< "`echo -e "$CPU_INFO"`"
+
+# calc cpu affinity(works only core id = 0, limits all core - 1)
 while read cid; do
   if [ ${cid} = "0" ]; then # main thread (non HT/SMT)
-    CPU_MASK=`expr $CPU_MASK + $CPU_FLAG`
-    CPU_PHYS=`expr $CPU_PHYS + 1`
+    CPU_USES=`expr $CPU_USES + 1`
+    if [ ${CPU_VIRT} -gt ${CPU_USES} ]; then
+      CPU_MASK=`expr $CPU_MASK + $CPU_FLAG`
+    fi
   fi
   CPU_FLAG=`expr $CPU_FLAG + $CPU_FLAG`
 done <<< "`echo -e "$CPU_INFO"`"
+
+if [ ${CPU_USES} -eq ${CPU_VIRT} ]; then
+  CPU_USES=`expr $CPU_USES - 1`
+fi
 
 cat << EOT > /root/invoke.sh
 #!/bin/bash
 
 # cpu setting
-CPU_LIMIT=$CPU_PHYS
+CPU_LIMIT=$CPU_USES
 CPU_AFFINITY=$CPU_MASK
 
 # process setting
