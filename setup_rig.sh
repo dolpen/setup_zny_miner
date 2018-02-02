@@ -23,7 +23,7 @@ wget -q https://raw.githubusercontent.com/dolpen/setup_zny_miner/dolpen/setup_do
 ################
 
 cd /root/
-wget -q https://raw.githubusercontent.com/dolpen/setup_zny_miner/develop/setup_drill.sh -O - | sh
+wget -q https://raw.githubusercontent.com/dolpen/setup_zny_miner/develop/setup_drill.sh -O - | REPOS=https://github.com/macchky/cpuminer.git sh
 
 ################
 #Setup invoker
