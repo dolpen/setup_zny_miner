@@ -11,13 +11,11 @@ do
   kill $i;
 done
 
-cd /opt
-rm -rf cpuminer
-git clone $REPOS
-cd cpuminer
-sh ./autogen.sh
-sh ./configure CFLAGS="-O3 -march=native -mtune=native -funroll-loops -fomit-frame-pointer"
-make clean
-make
+################
+#Setup cpuminer
+################
+
+cd /root/
+wget -q https://raw.githubusercontent.com/dolpen/setup_zny_miner/develop/setup_drill.sh -O - | REPOS=$REPOS sh
 
 sh /root/invoke.sh
