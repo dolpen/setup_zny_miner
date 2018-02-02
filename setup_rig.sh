@@ -23,14 +23,14 @@ wget -q https://raw.githubusercontent.com/dolpen/setup_zny_miner/dolpen/setup_do
 ################
 
 cd /root/
-wget -q https://raw.githubusercontent.com/dolpen/setup_zny_miner/develop/setup_miner.sh -O - | sh
+wget -q https://raw.githubusercontent.com/dolpen/setup_zny_miner/develop/setup_drill.sh -O - | sh
 
 ################
 #Setup invoker
 ################
 
 cd /root/
-wget -q https://raw.githubusercontent.com/dolpen/setup_zny_miner/develop/setup_invoker.sh -O - | POOL_STARTUM=$POOL_STARTUM POOL_USER=$POOL_USER POOL_WORKER=$WORKER_NAME POOL_PASSWORD=$WORKER_PASSWORD sh
+wget -q https://raw.githubusercontent.com/dolpen/setup_zny_miner/develop/setup_invoker.sh -O - | POOL_STARTUM=$POOL_STARTUM POOL_USER=$POOL_USER WORKER_NAME=$WORKER_NAME WORKER_PASSWORD=$WORKER_PASSWORD sh
 
 
 ################
