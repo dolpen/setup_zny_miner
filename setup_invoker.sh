@@ -8,12 +8,12 @@ if [ "$POOL_USER" = "" ]; then
   echo "check POOL_USER variable";
   exit 1
 fi
-if [ "$POOL_WORKER" = "" ]; then
-  echo "check POOL_WORKER variable";
+if [ "$WORKER_NAME" = "" ]; then
+  echo "check WORKER_NAME variable";
   exit 1
 fi
-if [ "$POOL_PASSWORD" = "" ]; then
-  echo "check POOL_PASSWORD variable";
+if [ "$WORKER_PASSWORD" = "" ]; then
+  echo "check WORKER_PASSWORD variable";
   exit 1
 fi
 
@@ -65,8 +65,8 @@ MINER_PROC="minerd"
 # pool setting
 POOL_STARTUM="$POOL_STARTUM"
 POOL_USER="$POOL_USER"
-POOL_WORKER="$POOL_WORKER"
-POOL_PASSWORD="$POOL_PASSWORD"
+POOL_WORKER="$WORKER_NAME"
+POOL_PASSWORD="$WORKER_PASSWORD"
 
 MINER_PARAMS="-a yescrypt -t \$CPU_LIMIT --cpu-affinity \$CPU_AFFINITY -o \$POOL_STARTUM -u \$POOL_USER.\$POOL_WORKER -p \$POOL_PASSWORD"
 #MINER_PARAMS="-a yescrypt -t 1 --cpu-affinity 1 -o \$POOL_STARTUM -u \$POOL_USER.\$POOL_WORKER -p \$POOL_PASSWORD"
