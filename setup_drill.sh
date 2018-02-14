@@ -3,7 +3,8 @@
 
 if [ "$REPOS" = "" ]; then
   echo "check REPOS variable";
-exit 1
+  exit 1
+fi
 
 yum -y groupinstall "Development Tools"
 yum -y install epel-release git screen
