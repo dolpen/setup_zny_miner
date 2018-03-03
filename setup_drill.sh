@@ -10,6 +10,7 @@ yum -y groupinstall "Development Tools"
 yum -y install epel-release git screen
 sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/epel.repo
 yum -y install jansson-devel libcurl-devel
+yum update -y nss curl libcurl
 cd /opt
 rm -rf cpuminer
 git clone $REPOS
